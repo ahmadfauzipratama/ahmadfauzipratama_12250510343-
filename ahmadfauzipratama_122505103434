@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+#define PIN 140504
+#define NOMOR_KARTU 140504
+#define SALDO_AWAL 100000000
+
+int main() {
+    int pin, kartu, saldo = SALDO_AWAL;
+    int pilihan, tarik, setor;
+    printf("========BANK FAUZI========\n");
+    printf("Selamat datang di ATM!\n");
+    printf("Masukkan nomor kartu: ");
+    scanf("%d", &kartu);
+
+    if (kartu == NOMOR_KARTU) {
+        printf("Masukkan PIN: ");
+        scanf("%d", &pin);
+
+        if (pin == PIN) {
+            printf("Login berhasil!\n");
+            printf("Saldo Anda: Rp %d\n", saldo);
+
+            while (1) {
+                printf("Pilih transaksi:\n");
+                printf("1. Tarik tunai\n");
+                printf("2. Setor tunai\n");
+                printf("3. Cek saldo\n");
+                printf("4. Keluar\n");
+                scanf("%d", &pilihan);
+
+                switch (pilihan) {
+                    case 1:
+                        printf("Masukkan jumlah tarik tunai: ");
+                        scanf("%d", &tarik);
+
+                        if (tarik <= saldo) {
+                            saldo -= tarik;
+                            printf("Tarik tunai berhasil! Saldo Anda: Rp %d\n", saldo);
+                        } else {
+                            printf("Saldo tidak cukup!\n");
+                        }
+                        break;
+
+                    case 2:
+                        printf("Masukkan jumlah setor tunai: ");
+                        scanf("%d", &setor);
+
+                        saldo += setor;
+                        printf("Setor tunai berhasil! Saldo Anda: Rp %d\n", saldo);
+                        break;
+
+                    case 3:
+                        printf("Saldo Anda: Rp %d\n", saldo);
+                        break;
+
+                    case 4:
+                        printf("Terima kasih telah menggunakan ATM!\n");
+                        return 0;
+
+                    default:
+                        printf("Pilihan tidak valid!\n");
+                }
+            }
+        } else {
+            printf("PIN anda salah!\n");
+        }
+    } else {
+        printf("Nomor kartu anda salah!\n");
+    }
+
+    return 0;
+}
